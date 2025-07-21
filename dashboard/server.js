@@ -2,12 +2,31 @@
 const express = require('express');
 const { exec } = require('child_process');
 const path = require('path');
+const fs = require('fs');
+const yaml = require('js-yaml');
+
+// figure out which project to serve
+const argvRoot = process.argv.find(a => a.startsWith('--project-root=')) || '';
+const PROJECT_ROOT = argvRoot ? argvRoot.split('=')[1] : process.cwd();
+const CONFIG_PATH = path.join(PROJECT_ROOT, '.dev-dashboard.yaml');
+
+let workflows = {};
+try {
+  const yamlText = fs.readFileSync(CONFIG_PATH, 'utf8');
+  workflows = yaml.load(yamlText).workflows || {};
+  console.log(`Loaded workflows from ${CONFIG_PATH}`);
+} catch (e) {
+  console.warn(`No .dev-dashboard.yaml found in ${PROJECT_ROOT}`);
+}
 
 const app = express();
 const PORT = process.env.PORT || 3333;
 const STATIC_ROOT = path.join(__dirname);
 
 app.use(express.static(STATIC_ROOT));
+
+// expose config to UI
+app.get('/config', (_, res) => res.json({ workflows }));
 
 app.get('/run', (req, res) => {
   const cmd = req.query.cmd;

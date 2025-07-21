@@ -22,6 +22,8 @@ cd /your/project
 ./dev.sh -cp                                   # or: dev-dashboard --project-root .
 ```
 
+The UI now auto-generates buttons from `.dev-dashboard.yaml`.
+
 🗺 Folder Layout
 ```text
 dashboard/   – static UI + Node server

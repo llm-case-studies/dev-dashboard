@@ -1,0 +1,26 @@
+project:
+  name: PronunCo
+  description: Language-learning pronunciation app
+  icon: "📣"
+
+workflows:
+  feature-dev:
+    name: "Feature Dev 🛠️"
+    steps:
+      install: "npm install"
+      dev: "npm run dev"
+      open: "xdg-open http://localhost:3000 || open http://localhost:3000"
+
+  mobile-test:
+    name: "Mobile Test 📱"
+    steps:
+      build: "npm run build"
+      serve: "npm run serve -- --host"
+      qr: "qrencode -t ansiutf8 http://$(hostname -I | awk '{print $1}'):3000"
+
+  prod-check:
+    name: "Prod-like 🔒"
+    steps:
+      build: "npm run build"
+      docker: "docker run --rm -p 8080:80 -v $(pwd)/dist:/usr/share/nginx/html nginx:alpine"
+      smoke: "curl -I http://localhost:8080 || true"
