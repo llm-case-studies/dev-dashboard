@@ -1,14 +1,25 @@
 #!/usr/bin/env node
-import express from 'express';
-import { exec } from 'child_process';
+const express = require('express');
+const { exec } = require('child_process');
+const path = require('path');
+
 const app = express();
-app.use(express.static(new URL('.', import.meta.url).pathname + '/'));
+const PORT = process.env.PORT || 3333;
+const STATIC_ROOT = path.join(__dirname);
+
+app.use(express.static(STATIC_ROOT));
+
 app.get('/run', (req, res) => {
   const cmd = req.query.cmd;
-  if (!cmd) return res.status(400).send('No cmd');
+  if (!cmd) return res.status(400).send('Missing cmd query param');
   const child = exec(cmd, { cwd: process.cwd() });
+
+  res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
   child.stdout.pipe(res, { end: false });
   child.stderr.pipe(res, { end: false });
   child.on('close', () => res.end());
 });
-app.listen(3333, () => console.log('Dev Dashboard ⏩ http://localhost:3333'));
+
+app.listen(PORT, () =>
+  console.log(`Dev Dashboard listening → http://localhost:${PORT}`)
+);

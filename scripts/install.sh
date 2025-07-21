@@ -1,27 +1,39 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
+
 ROOT="$HOME/.dev-dashboard"
 REPO="https://github.com/llm-case-studies/dev-dashboard.git"
+
+echo "📥  Installing Dev Dashboard into $ROOT"
 mkdir -p "$ROOT"
-# clone or pull
-if [ -d "$ROOT/.git" ]; then
+
+if [[ -d "$ROOT/.git" ]]; then
   git -C "$ROOT" pull --quiet
 else
   git clone --depth 1 "$REPO" "$ROOT"
 fi
-# wrapper
+
+# Install production Node deps
+cd "$ROOT"
+if [[ -f package.json ]]; then
+  npm install --omit=dev --silent
+fi
+
+# Create wrapper
 mkdir -p "$ROOT/bin"
 cat > "$ROOT/bin/dev-dashboard" <<'EOS'
 #!/usr/bin/env bash
 node "$HOME/.dev-dashboard/dashboard/server.js" "$@"
 EOS
 chmod +x "$ROOT/bin/dev-dashboard"
-# PATH injection (bash / zsh)
-if ! echo "$PATH" | grep -q "$ROOT/bin"; then
-  SHELL_RC="$HOME/.bashrc"
-  if [ -n "$ZSH_VERSION" ]; then
-    SHELL_RC="$HOME/.zshrc"
-  fi
-  echo 'export PATH="$PATH:$HOME/.dev-dashboard/bin"' >> "$SHELL_RC"
-  echo "Added dev-dashboard to PATH. Please restart your shell." >&2
+
+# Ensure PATH (bash & zsh)
+SHELL_RC="$HOME/.bashrc"
+[[ "$SHELL" == */zsh ]] && SHELL_RC="$HOME/.zshrc"
+
+if ! grep -q "$ROOT/bin" "$SHELL_RC"; then
+  echo "export PATH=\"$ROOT/bin:\$PATH\"" >> "$SHELL_RC"
+  export PATH="$ROOT/bin:$PATH"
 fi
+
+echo "✅  Dev Dashboard installed. Run: dev-dashboard"

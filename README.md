@@ -34,12 +34,13 @@ examples/    – sample projects using the dashboard
 
 🛣 Roadmap
 
-| Phase | Goal | ETA |
-|------|-----------------------------|--------|
-| 0 | MVP for PronunCo | Aug 2025 |
-| 1 | Adapter plugins + hot-reload | Sep 2025 |
-| 2 | VS Code webview extension | Oct 2025 |
-| 3 | Public 1.0 & brew/npm installers | Q1-2026 |
+| Phase | Goal | Deadline |
+|-------|------|----------|
+| 0 | Scaffold, installer, minimal UI | **Tonight – Jul 20** |
+| 1 | PronunCo YAML + `dev.sh -cp` | **Jul 21** |
+| 2 | Port ping + IndexedDB state | Jul 22 |
+| 3 | Adapter plugin system | Jul 23 |
+| 4 | Docs site + white-paper draft | Jul 24 |
 
 Docs folder outline
 ```text
