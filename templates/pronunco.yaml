@@ -1,0 +1,12 @@
+workflows:
+  feature-dev:
+    steps:
+      - npm install
+      - npm run dev
+  mobile-test:
+    steps:
+      - npm run test:mobile
+  prod-check:
+    steps:
+      - npm run lint
+      - npm run build
