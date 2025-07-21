@@ -1,19 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>Dev Dashboard</title>
-  <style>
-    body{font-family:sans-serif;margin:1.5rem}
-    section{margin-bottom:2rem}
-    button{margin:0.25rem 0.5rem;padding:0.4rem 0.9rem}
-    pre{background:#111;color:#0f0;padding:1rem;height:55vh;overflow:auto}
-  </style>
-</head>
-<body>
-  <h1>🚀 Dev Dashboard</h1>
-  <div id="workflows">Loading config…</div>
-  <pre id="log">Ready…</pre>
-  <script src="dashboard.js"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><title>Dev Dashboard</title>
+<style>
+ body{font-family:sans-serif;margin:1.5rem}
+ h1{display:flex;gap:.5rem;align-items:center}
+ fieldset{border:1px solid #ccc;padding:.5rem 1rem;margin:.5rem 0}
+ button{margin:.25rem .4rem;padding:.3rem .9rem}
+ pre{background:#111;color:#0f0;padding:1rem;height:50vh;overflow:auto}
+ label{margin-right:.8rem}
+</style></head><body>
+<h1>🚀 <span id="title">Dev Dashboard</span></h1>
+<div id="root">Loading…</div>
+<pre id="log">Ready…</pre>
+<script src="dashboard.js"></script>
+</body></html>

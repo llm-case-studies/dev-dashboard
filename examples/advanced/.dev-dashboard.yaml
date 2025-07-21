@@ -1,0 +1,26 @@
+project:
+  name: Example Advanced
+components:
+  ui:
+    type: checkbox
+    name: "UI Frontend"
+    dev: "echo run-ui"
+  api:
+    type: checkbox
+    name: "API Backend"
+    dev: "echo run-api"
+workflows:
+  env-mode:
+    type: radio-group
+    name: "Environment"
+    options:
+      dev:
+        name: "Dev 🖥️"
+        components: ["ui","api"]
+      prod:
+        name: "Prod 🐳"
+        components: ["ui","api"]
+workflow-groups:
+  development:
+    name: "🔨️ Development"
+    workflows: ["env-mode"]
