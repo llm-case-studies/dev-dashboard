@@ -1,15 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"/>
   <title>Dev Dashboard</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    button { margin-right: 1rem; padding: .5rem 1rem; }
+    pre { background:#111;color:#0f0;padding:1rem;height:60vh;overflow:auto; }
+  </style>
 </head>
 <body>
-  <h1>Dev Dashboard</h1>
-  <button id="btn-install">npm install</button>
-  <button id="btn-dev">npm run dev</button>
-  <button id="btn-build">npm run build</button>
-  <pre id="log"></pre>
-  <script type="module" src="./dashboard.js"></script>
+  <h1>🚀 Dev Dashboard</h1>
+  <button onclick="run('npm install')">Install deps</button>
+  <button onclick="run('npm run dev')">Start dev-server</button>
+  <button onclick="run('npm run build')">Build</button>
+  <pre id="log">Ready…</pre>
+
+  <script src="dashboard.js"></script>
 </body>
 </html>

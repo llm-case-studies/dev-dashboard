@@ -1,0 +1,9 @@
+{
+  "name": "dev-dashboard",
+  "version": "0.0.1-alpha",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.19.0"
+  }
+}
