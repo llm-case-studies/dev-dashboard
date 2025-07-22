@@ -28,7 +28,7 @@ try {
 }
 
 const app = express();
-const PORT = process.env.PORT || 3333;
+const PORT = process.env.PORT || 3334;
 const STATIC_ROOT = path.join(__dirname);
 
 app.use(express.static(STATIC_ROOT));
@@ -47,6 +47,10 @@ app.get('/run', (req, res) => {
   child.on('close', () => res.end());
 });
 
-app.listen(PORT, () =>
-  console.log(`Dev Dashboard listening → http://localhost:${PORT}`)
-);
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () =>
+    console.log(`Dev Dashboard listening → http://localhost:${PORT}`)
+  );
+}
+
+export default app;
