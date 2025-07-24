@@ -1,0 +1,19 @@
+project:
+  name: "Git Operations"
+  icon: "🗂️"
+
+workflows:
+  git-status:
+    name: "Check Status"
+    command: "git status"
+  git-log:
+    name: "View History"
+    command: "git log --oneline -n 10"
+  git-pull:
+    name: "Pull Changes"
+    command: "git pull --rebase"
+
+workflow-groups:
+  git:
+    name: "Git Commands"
+    workflows: ["git-status", "git-log", "git-pull"]

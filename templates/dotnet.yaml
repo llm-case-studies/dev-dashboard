@@ -1,0 +1,34 @@
+project:
+  name: "My .NET API"
+  icon: "🔷"
+  port: 5001
+
+components:
+  restore-deps:
+    name: "Restore Dependencies"
+    command: "dotnet restore"
+  run-api:
+    name: "Run API"
+    command: "dotnet run --project ./src/MyApi/MyApi.csproj"
+  run-tests:
+    name: "Run Tests"
+    command: "dotnet test"
+
+workflows:
+  main-dev-cycle:
+    name: "Development"
+    options:
+      - run-api
+      - run-tests
+  setup:
+    name: "Setup"
+    options:
+      - restore-deps
+
+workflow-groups:
+  development:
+    name: "🧑‍💻 Core Development"
+    workflows: ["main-dev-cycle"]
+  maintenance:
+    name: "🛠️ Maintenance"
+    workflows: ["setup"]

@@ -2,9 +2,20 @@
   "name": "dev-dashboard",
   "version": "0.0.1-alpha",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
+  "bin": {
+    "dev-dashboard": "dashboard/server.js"
+  },
   "dependencies": {
+    "dotenv": "^17.2.0",
     "express": "^4.19.0",
     "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.0",
+    "supertest": "^6.3.3"
+  },
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   }
 }

@@ -1,4 +1,6 @@
 /node_modules/
+/Docs/ui-screenshots/
 .env
+.env.local
 .DS_Store
 __pycache__/

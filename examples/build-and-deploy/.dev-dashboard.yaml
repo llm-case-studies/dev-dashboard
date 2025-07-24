@@ -1,0 +1,18 @@
+project:
+  name: "Build & Deploy"
+  icon: "🚀"
+
+workflows:
+  build:
+    name: "Build Project"
+    steps:
+      install: "npm install"
+      build: "npm run build"
+  deploy:
+    name: "Deploy to Staging"
+    command: "./scripts/deploy-staging.sh"
+
+workflow-groups:
+  deployment:
+    name: "Build and Deploy"
+    workflows: ["build", "deploy"]

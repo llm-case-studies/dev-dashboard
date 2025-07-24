@@ -1,0 +1,19 @@
+project:
+  name: "ML Pipeline"
+  icon: "🤖"
+
+workflows:
+  data-prep:
+    name: "Prepare Data"
+    command: "python scripts/prepare_data.py"
+  train-model:
+    name: "Train Model"
+    command: "python scripts/train_model.py"
+  evaluate-model:
+    name: "Evaluate Model"
+    command: "python scripts/evaluate_model.py"
+
+workflow-groups:
+  ml:
+    name: "Machine Learning"
+    workflows: ["data-prep", "train-model", "evaluate-model"]

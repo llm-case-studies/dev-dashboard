@@ -1,0 +1,34 @@
+project:
+  name: "My Rust Service"
+  icon: "🦀"
+
+components:
+  check-code:
+    name: "Check"
+    command: "cargo check"
+  run-dev:
+    name: "Run (Debug)"
+    command: "cargo run"
+  run-tests:
+    name: "Test"
+    command: "cargo test"
+  build-release:
+    name: "Build (Release)"
+    command: "cargo build --release"
+
+workflows:
+  main-dev-cycle:
+    name: "Development"
+    options:
+      - check-code
+      - run-dev
+      - run-tests
+  deployment:
+    name: "Deployment"
+    options:
+      - build-release
+
+workflow-groups:
+  development:
+    name: "🧑‍💻 Core Development"
+    workflows: ["main-dev-cycle", "deployment"]

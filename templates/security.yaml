@@ -1,0 +1,50 @@
+project:
+  name: "Project Security Audit"
+  icon: "🛡️"
+
+components:
+  # Dependency Checks
+  npm-audit:
+    name: "Scan NPM Dependencies"
+    command: "npm audit --audit-level=high"
+
+  # Static Analysis (SAST)
+  semgrep-scan:
+    name: "Scan Code for Bugs"
+    command: "semgrep scan --config auto"
+  gitleaks-scan:
+    name: "Scan for Hardcoded Secrets"
+    command: "gitleaks detect -v"
+
+  # Container Security
+  build-image:
+    name: "Build Docker Image"
+    command: "docker build -t my-app:latest ."
+  trivy-scan:
+    name: "Scan Docker Image"
+    command: "trivy image my-app:latest"
+
+workflows:
+  # Individual Scans
+  scan-deps:
+    name: "1. Check Dependencies"
+    options: [npm-audit]
+  scan-code:
+    name: "2. Run Static Analysis"
+    options: [semgrep-scan, gitleaks-scan]
+  scan-container:
+    name: "3. Scan Container"
+    options: [build-image, trivy-scan]
+
+  # Full Scan
+  full-audit:
+    name: "Run Full Security Audit"
+    options: [npm-audit, semgrep-scan, gitleaks-scan, build-image, trivy-scan]
+
+workflow-groups:
+  security-audit:
+    name: "🔒 Self-Service VAPT"
+    workflows: [scan-deps, scan-code, scan-container]
+  all-in-one:
+    name: "💥 Full Audit"
+    workflows: [full-audit]

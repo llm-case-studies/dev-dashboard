@@ -17,9 +17,28 @@
 ## 🔧 Quick Start
 
 ```bash
-curl -sSL dev-dashboard.tools/install | bash   # add bin + PATH
+npm install --save-dev dev-dashboard
 cd /your/project
-./dev.sh -cp                                   # or: dev-dashboard --project-root .
+npx dev-dashboard
+```
+
+## Initializing a Project
+
+To get started quickly, you can use the `--init` command to generate a `.dev-dashboard.yaml` file from a template. 
+
+To see available templates run:
+```bash
+npx dev-dashboard --init
+```
+
+To generate a file from a specific template run:
+```bash
+npx dev-dashboard --init <template_name>
+```
+
+For example:
+```bash
+npx dev-dashboard --init python
 ```
 
 The UI now auto-generates buttons from `.dev-dashboard.yaml`.
