@@ -22,8 +22,23 @@ workflows:
       serve:
         name: "Run Dashboard"
         components: ["dev-server"]
+  billing-status:
+    name: "Billing Status"
+    command: "gcloud billing projects describe $GOOGLE_CLOUD_PROJECT --format='table(billingAccountName,billingEnabled)'"
+  list-budgets:
+    name: "List Budgets"
+    command: "gcloud billing budgets list"
+  view-ideas:
+    name: "View Ideas"
+    command: "cat docs/ideas.md"
 
 workflow-groups:
   development:
     name: "🧑‍💻 Core Development"
     workflows: ["main-dev-cycle"]
+  billing:
+    name: "💰 Billing"
+    workflows: ["billing-status", "list-budgets"]
+  documentation:
+    name: "📚 Documentation"
+    workflows: ["view-ideas"]
