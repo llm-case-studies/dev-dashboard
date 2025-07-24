@@ -1,26 +1,28 @@
 project:
-  name: PronunCo
-  description: Language-learning pronunciation app
-  icon: "📣"
+  name: "Dev-Dashboard Dev"
+  icon: "🛠️"
+
+components:
+  test-suite:
+    name: "Run Jest Tests"
+    command: "npm test"
+  dev-server:
+    name: "Start Dashboard Server"
+    command: "node dashboard/server.js --project-root ."
 
 workflows:
-  feature-dev:
-    name: "Feature Dev 🛠️"
-    steps:
-      install: "npm install"
-      dev: "npm run dev"
-      open: "xdg-open http://localhost:3000 || open http://localhost:3000"
+  main-dev-cycle:
+    type: radio-group
+    name: "Development Tasks"
+    options:
+      test:
+        name: "Run Tests"
+        components: ["test-suite"]
+      serve:
+        name: "Run Dashboard"
+        components: ["dev-server"]
 
-  mobile-test:
-    name: "Mobile Test 📱"
-    steps:
-      build: "npm run build"
-      serve: "npm run serve -- --host"
-      qr: "qrencode -t ansiutf8 http://$(hostname -I | awk '{print $1}'):3000"
-
-  prod-check:
-    name: "Prod-like 🔒"
-    steps:
-      build: "npm run build"
-      docker: "docker run --rm -p 8080:80 -v $(pwd)/dist:/usr/share/nginx/html nginx:alpine"
-      smoke: "curl -I http://localhost:8080 || true"
+workflow-groups:
+  development:
+    name: "🧑‍💻 Core Development"
+    workflows: ["main-dev-cycle"]

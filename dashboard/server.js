@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import 'dotenv/config';
 import express from 'express';
 import { exec } from 'child_process';
 import path from 'path';

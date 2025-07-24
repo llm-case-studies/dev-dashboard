@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-WRAPPER="$HOME/.dev-dashboard/bin/dev-dashboard"
+WRAPPER="$HOME/.dev-dashboard-dev/bin/dev-dashboard"
 INSTALLER_PATH="$(dirname "$0")/../scripts/install.sh"   # repo-relative
 
 install_if_needed () {
@@ -40,7 +40,7 @@ while [[ $# -gt 0 ]]; do
       dev-dashboard --project-root "$(pwd)" &
       sleep 1
       python3 - <<'PY'
-import time, webbrowser; time.sleep(2); webbrowser.open("http://localhost:3333")
+import time, webbrowser; time.sleep(2); webbrowser.open("http://localhost:3334")
 PY
       wait
       exit 0
