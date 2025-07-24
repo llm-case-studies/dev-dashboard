@@ -1,0 +1,34 @@
+project:
+  name: "My Python App"
+  icon: "🐍"
+  port: 8000
+
+components:
+  install-deps:
+    name: "Install Dependencies"
+    command: "pip install -r requirements.txt"
+  run-server:
+    name: "Run FastAPI Server"
+    command: "uvicorn main:app --reload"
+  run-tests:
+    name: "Run Pytest"
+    command: "pytest"
+
+workflows:
+  main-dev-cycle:
+    name: "Development"
+    options:
+      - run-server
+      - run-tests
+  setup:
+    name: "Setup"
+    options:
+      - install-deps
+
+workflow-groups:
+  development:
+    name: "🧑‍💻 Core Development"
+    workflows: ["main-dev-cycle"]
+  maintenance:
+    name: "🛠️ Maintenance"
+    workflows: ["setup"]

@@ -1,6 +1,7 @@
 project:
   name: "Dev-Dashboard Dev"
   icon: "🛠️"
+  port: 3335
 
 components:
   test-suite:

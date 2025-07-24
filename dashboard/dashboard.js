@@ -1,7 +1,8 @@
 async function run(cmd){
   const log=document.getElementById('log');
+  const saveLog = document.getElementById('save-log').checked;
   log.textContent=`▶ ${cmd}\n`;
-  const resp=await fetch('/run?cmd='+encodeURIComponent(cmd));
+  const resp=await fetch(`/run?cmd=${encodeURIComponent(cmd)}${saveLog ? '&log=true' : ''}`);
   const reader=resp.body.getReader(), dec=new TextDecoder();
   while(true){
     const {value,done}=await reader.read();

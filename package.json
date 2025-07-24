@@ -3,6 +3,9 @@
   "version": "0.0.1-alpha",
   "private": true,
   "type": "module",
+  "bin": {
+    "dev-dashboard": "dashboard/server.js"
+  },
   "dependencies": {
     "dotenv": "^17.2.0",
     "express": "^4.19.0",
